@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CORS Vulnerability Demo</title>
+</head>
+<body>
+    <h1>CORS Vulnerability Demonstration</h1>
+    <button id="fetchData">Fetch Data from /bWAPP/secret-cors-1.php</button>
+    <div id="response" style="margin-top: 20px;"></div>
+
+    <script>
+        document.getElementById('fetchData').addEventListener('click', function() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://192.168.1.65/bWAPP/secret-cors-1.php', true);
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // Echo the response body
+                        document.getElementById('response').innerText = 'Response: ' + xhr.responseText;
+                    } else {
+                        document.getElementById('response').innerText = 'Error: ' + xhr.status;
+                    }
+                }
+            };
+            xhr.send();
+        });
+    </script>
+</body>
+</html>

