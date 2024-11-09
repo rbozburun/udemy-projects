@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .profile-container { max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
+        h1 { color: #333; }
+        .user-info { margin-top: 20px; font-size: 1.2em; }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <h1>User Profile</h1>
+        <div class="user-info">
+            Welcome, <span id="username"></span>!
+        </div>
+    </div>
+
+    <script>
+        // Extract the 'username' parameter from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const username = urlParams.get('username');
+
+        // Inject the username into the DOM
+        document.getElementById("username").innerHTML = username ? username : "Guest";
+    </script>
+</body>
+</html>
